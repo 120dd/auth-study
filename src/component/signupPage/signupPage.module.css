@@ -1,0 +1,10 @@
+.signupPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signupForm {
+    display: flex;
+    flex-direction: column;
+}
