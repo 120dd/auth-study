@@ -7,12 +7,12 @@ const Header = (props) => {
     const [isModaled, setIsModaled] = useState(false);
 
     const onModalClick = () => {
-        isModaled? setIsModaled(false):setIsModaled(true);
+        isModaled ? setIsModaled(false) : setIsModaled(true);
     }
-    return(
+    return (
         <header className={styles.header}>
             <h1>auth study site</h1>
-            <Button btnName={`${isModaled ? "▲":"▼"}`} clickFunction={onModalClick} />
+            <Button btnName={`${isModaled ? "▲" : "▼"}`} clickFunction={onModalClick}/>
             <nav className={`${styles.nav} ${!isModaled && styles.none}`}>
                 <Link to="/">홈</Link>
                 <Link to="/login">로그인</Link>

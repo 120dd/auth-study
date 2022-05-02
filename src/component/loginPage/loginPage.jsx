@@ -1,46 +1,38 @@
-import React, {useEffect, useRef} from 'react';
+import React , { useEffect , useRef } from 'react';
 import Button from "../button";
 import styles from "./logonPage.module.css";
-import {useDispatch, useSelector} from "react-redux";
-import {getLogin} from "../../service/redux/authReducer/authSlice";
-import {useNavigate} from "react-router-dom";
-import {signIn} from "../../service/redux/authReducer/authService";
+import { useDispatch , useSelector } from "react-redux";
+import { getLogin } from "../../service/redux/authReducer/authSlice";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = (props) => {
+const LoginPage = ( props ) => {
 
     const dispatch = useDispatch();
     const isLogined = useSelector((state => state.authReducer.isLogined));
     let navigate = useNavigate();
-    //
-    // useEffect(() => {
-    //     if (isLogined === true) {
-    //         alert('이미 로그인 된 사용자입니다.')
-    //         navigate('/');
-    //     }
-    // }, [])
 
     const idRef = useRef();
     const pwRef = useRef();
 
-    const onLogin = async (e) => {
+    const onLogin = async ( e ) => {
         e.preventDefault();
         const id = idRef.current.value;
         const pw = pwRef.current.value;
-        await dispatch(getLogin({id, pw}))
-            // .then(res => {
-            //     console.log(isLogined);
-            //     if (isLogined === true){
-            //         alert("로그인 성공");
-            //         navigate("/");
-            //     }
-            // })
+        await dispatch(getLogin({ id , pw }))
+        // .then(res => {
+        //     console.log(isLogined);
+        //     if (isLogined === true){
+        //         alert("로그인 성공");
+        //         navigate("/");
+        //     }
+        // })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         if (isLogined) {
             console.log(isLogined);
         }
-    },[isLogined])
+    } , [isLogined])
 
     return (
         <div className={styles.loginPage}>

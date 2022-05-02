@@ -1,17 +1,17 @@
 import React from 'react';
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
-const UserInfo = (props) => {
+const UserInfo = ( props ) => {
 
-    const user =useSelector((state => state.authReducer.user));
+    const user = useSelector((state => state.authReducer.user));
     console.log(user);
-    return(
+    return (
         <div>
             <h1>UserInfo</h1>
             <ul>
                 <li>Id: {user.id}</li>
-                <li>username: </li>
-                <li>signupDate: </li>
+                <li>username: {user.username} </li>
+                <li>signupDate: {user.signup_date} </li>
                 <li>birth: {user.birthDay}</li>
             </ul>
         </div>

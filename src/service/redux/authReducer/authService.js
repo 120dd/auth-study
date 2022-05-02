@@ -1,50 +1,69 @@
 import axios from "axios";
 
-export const signUp = async (id, pw, birth) => {
+export const signUp = async ( id , pw , birth , userName ) => {
     const data = JSON.stringify({
-        "username": id,
-        "password": pw,
-        "birthday": birth
+        "id": id ,
+        "password": pw ,
+        "username": userName ,
+        "birthday": birth ,
     });
 
     const config = {
-        method: 'post',
-        url: 'http://localhost:3001/signup',
+        method: 'post' ,
+        url: 'http://localhost:3001/signup' ,
         headers: {
             'Content-Type': 'application/json'
-        },
+        } ,
         data: data
     };
 
-    return await axios(config)
-        .then(function (response) {
-            console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    try {
+        await axios(config)
+    } catch (err) {
+        console.log(err);
+    }
 }
 
-export const signIn = async (userInfo) => {
+export const signIn = async ( userInfo ) => {
     const data = JSON.stringify({
-        "username": userInfo.id,
-        "password": userInfo.pw,
+        "id": userInfo.id ,
+        "password": userInfo.pw ,
     });
 
     const config = {
-        method: 'post',
-        url: 'http://localhost:3001/login',
+        method: 'post' ,
+        url: 'http://localhost:3001/login' ,
         headers: {
             'Content-Type': 'application/json'
-        },
-        data : data
+        } ,
+        data: data
     };
 
-    return  await axios(config)
-        .then(res=> {
-            return res;
-        })
-        .catch(err=>{
-            throw err
-        })
+    try {
+        const { data } = await axios(config)
+    } catch (err) {
+        console.log(err);
+    }
 }
+
+// export async function signIn ( userInfo ) {
+//     const data = {
+//         "id": userInfo.id ,
+//         "password": userInfo.pw ,
+//     };
+//
+//     const config = {
+//         method: 'post' ,
+//         url: 'http://localhost:3001/login' ,
+//         headers: {
+//             'Content-Type': 'application/json'
+//         } ,
+//         data: data
+//     };
+//
+//     const result = await axios.post(config.url , data)
+//         .then(res => res.data)
+//         .catch(err => {
+//             throw err
+//         })
+// }
