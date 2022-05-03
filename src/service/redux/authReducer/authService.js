@@ -24,33 +24,11 @@ export const signUp = async ( id , pw , birth , userName ) => {
     }
 }
 
-export const signIn = async ( userInfo ) => {
-    const data = JSON.stringify({
-        "id": userInfo.id ,
-        "password": userInfo.pw ,
-    });
-
-    const config = {
-        method: 'post' ,
-        url: 'http://localhost:3001/login' ,
-        headers: {
-            'Content-Type': 'application/json'
-        } ,
-        data: data
-    };
-
-    try {
-        const { data } = await axios(config)
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-// export async function signIn ( userInfo ) {
-//     const data = {
+// export const signIn = async ( userInfo ) => {
+//     const data = JSON.stringify({
 //         "id": userInfo.id ,
 //         "password": userInfo.pw ,
-//     };
+//     });
 //
 //     const config = {
 //         method: 'post' ,
@@ -61,9 +39,8 @@ export const signIn = async ( userInfo ) => {
 //         data: data
 //     };
 //
-//     const result = await axios.post(config.url , data)
-//         .then(res => res.data)
-//         .catch(err => {
-//             throw err
-//         })
-// }
+//     try {
+//         const { data } = await axios(config)
+//     } catch (err) {
+//         console.log(err);
+//     }

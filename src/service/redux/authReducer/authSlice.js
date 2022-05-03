@@ -1,17 +1,25 @@
 import { createAsyncThunk , createSlice } from '@reduxjs/toolkit';
-import { signIn } from "./authService";
+import axios from "axios";
 
 export const getLogin = createAsyncThunk(
     'auth/getLogin' ,
-    async ( userInfo , thunkAPI ) => {
-        await signIn(userInfo)
-            .then(res => {
-                console.log(res);
-                return res;
-            })
-            .catch(err => {
-                throw err
-            })
+    async ( userInfo ) => {
+        const axiosData = JSON.stringify({
+            "id": userInfo.id ,
+            "password": userInfo.pw ,
+        });
+
+        const config = {
+            method: 'post' ,
+            url: 'http://localhost:3001/login' ,
+            headers: {
+                'Content-Type': 'application/json'
+            } ,
+            data: axiosData
+        };
+        const { data } = await axios(config);
+        console.log(data);
+        return data;
     }
 )
 
@@ -32,9 +40,10 @@ export const authSlice = createSlice({
         builder.addCase(getLogin.fulfilled , ( state , action ) => {
             state.user = action.payload;
             state.isLogined = true;
+            
         });
         builder.addCase(getLogin.rejected , ( state ) => {
-            console.log("리젝트");
+            alert("로그인에 실패했습니다");
             state.isLogined = false;
         })
     }
