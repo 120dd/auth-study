@@ -20,6 +20,7 @@ const LoginPage = () => {
             alert("로그인에 성공했습니다");
             navigate('/');
         }
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     } , [isLogined])
 
     const onLogin = async ( e ) => {
@@ -29,7 +30,6 @@ const LoginPage = () => {
         await dispatch(getLogin({ id , pw }));
         formRef.current.reset();
     }
-
 
     return (
         <div className={styles.loginPage}>

@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter , Route , Routes } from "react-router-dom";
 import App from './App';
 import LoginPage from "./component/loginPage/loginPage";
 import SignupPage from "./component/signupPage/signupPage";
 import UserInfo from "./component/userInfo";
 import { Provider } from 'react-redux'
-import { store} from "./service/redux/store";
+import { store } from "./service/redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

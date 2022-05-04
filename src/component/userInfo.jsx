@@ -12,7 +12,7 @@ const UserInfo = ( props ) => {
                 <li>Id: {user.id}</li>
                 <li>username: {user.username} </li>
                 <li>signupDate: {user.signup_date} </li>
-                <li>birth: {user.birthDay}</li>
+                <li>birth: {user.birth}</li>
             </ul>
         </div>
     )

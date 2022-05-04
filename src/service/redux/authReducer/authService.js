@@ -1,46 +1,25 @@
-import axios from "axios";
+import API from "../../API";
 
 export const signUp = async ( id , pw , birth , userName ) => {
-    const data = JSON.stringify({
+    const data = {
         "id": id ,
         "password": pw ,
         "username": userName ,
-        "birthday": birth ,
-    });
-
-    const config = {
-        method: 'post' ,
-        url: 'http://localhost:3001/signup' ,
-        headers: {
-            'Content-Type': 'application/json'
-        } ,
-        data: data
+        "birth": birth ,
     };
 
     try {
-        await axios(config)
+        await API.post('/signup' , data)
     } catch (err) {
         console.log(err);
     }
 }
 
-// export const signIn = async ( userInfo ) => {
-//     const data = JSON.stringify({
-//         "id": userInfo.id ,
-//         "password": userInfo.pw ,
-//     });
-//
-//     const config = {
-//         method: 'post' ,
-//         url: 'http://localhost:3001/login' ,
-//         headers: {
-//             'Content-Type': 'application/json'
-//         } ,
-//         data: data
-//     };
-//
-//     try {
-//         const { data } = await axios(config)
-//     } catch (err) {
-//         console.log(err);
-//     }
+export const getUsers = async () => {
+    try {
+        const { data } = await API.get('/users');
+        return data
+    } catch (e) {
+        console.error(e);
+    }
+}

@@ -1,23 +1,18 @@
 import { createAsyncThunk , createSlice } from '@reduxjs/toolkit';
-import axios from "axios";
+import API from "../../API";
 
 export const getLogin = createAsyncThunk(
     'auth/getLogin' ,
     async ( userInfo ) => {
-        const axiosData = JSON.stringify({
+        const axiosData = {
             "id": userInfo.id ,
             "password": userInfo.pw ,
-        });
-
-        const config = {
-            method: 'post' ,
-            url: 'http://localhost:3001/login' ,
-            headers: {
-                'Content-Type': 'application/json'
-            } ,
-            data: axiosData
         };
-        const { data } = await axios(config);
+
+        const { data } = await API.post(
+            '/login' ,
+            axiosData ,
+        );
         console.log(data);
         return data;
     }
@@ -26,6 +21,7 @@ export const getLogin = createAsyncThunk(
 const initialState = {
     isLogined: false ,
     user: {
+        signup_date: "" ,
         id: "" ,
         birth: "" ,
         username: "" ,
@@ -35,12 +31,17 @@ const initialState = {
 export const authSlice = createSlice({
     name: 'auth' ,
     initialState ,
-    reducers: {} ,
+    reducers: {
+        getLogout: ( state ) => {
+            state.isLogined = false;
+            state.user = { ...initialState.user };
+        }
+    } ,
     extraReducers: ( builder ) => {
         builder.addCase(getLogin.fulfilled , ( state , action ) => {
             state.user = action.payload;
             state.isLogined = true;
-            
+
         });
         builder.addCase(getLogin.rejected , ( state ) => {
             alert("로그인에 실패했습니다");
@@ -49,4 +50,6 @@ export const authSlice = createSlice({
     }
 })
 
-export default authSlice.reducer
+export const { getLogout } = authSlice.actions;
+
+export default authSlice.reducer;
