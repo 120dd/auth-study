@@ -1,6 +1,7 @@
-import API from "../../API";
+import API from "./API";
 
-export const signUp = async ( id , pw , birth , userName ) => {
+export const signUp = async ( signUpInfo ) => {
+    const { id , pw , userName , birth } = signUpInfo;
     const data = {
         "id": id ,
         "password": pw ,
@@ -9,9 +10,12 @@ export const signUp = async ( id , pw , birth , userName ) => {
     };
 
     try {
-        await API.post('/signup' , data)
+        await API.post(
+            '/signup' ,
+            data ,
+        )
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 }
 

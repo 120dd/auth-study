@@ -1,7 +1,7 @@
 import React , { useRef } from 'react';
 import Button from "../button";
 import styles from "./signupPage.module.css";
-import { signUp } from "../../service/redux/authReducer/authService";
+import { signUp } from "../../service/authService";
 import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
@@ -35,7 +35,7 @@ const SignupPage = () => {
             return;
         }
 
-        await signUp(id , pw , birth , userName);
+        await signUp({ id , pw , birth , userName });
         formRef.current.reset();
         alert("회원가입이 완료되었습니다");
         navigate("/");

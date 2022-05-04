@@ -1,5 +1,5 @@
 import { createAsyncThunk , createSlice } from '@reduxjs/toolkit';
-import API from "../../API";
+import API from "../../service/API";
 
 export const getLogin = createAsyncThunk(
     'auth/getLogin' ,
@@ -13,6 +13,17 @@ export const getLogin = createAsyncThunk(
             '/login' ,
             axiosData ,
         );
+        return data;
+    }
+)
+
+export const getUserInfo = createAsyncThunk(
+    'auth/getUserInfo' ,
+    async ( access_token ) => {
+        API.defaults.headers = {
+            'authorization': access_token
+        }
+        const { data } = await API.get('/getUserInfo');
         console.log(data);
         return data;
     }
@@ -20,6 +31,7 @@ export const getLogin = createAsyncThunk(
 
 const initialState = {
     isLogined: false ,
+    access_token: "" ,
     user: {
         signup_date: "" ,
         id: "" ,
@@ -34,18 +46,22 @@ export const authSlice = createSlice({
     reducers: {
         getLogout: ( state ) => {
             state.isLogined = false;
+            state.access_token = "";
             state.user = { ...initialState.user };
         }
     } ,
     extraReducers: ( builder ) => {
         builder.addCase(getLogin.fulfilled , ( state , action ) => {
-            state.user = action.payload;
+            state.access_token = action.payload.access_token;
             state.isLogined = true;
-
         });
         builder.addCase(getLogin.rejected , ( state ) => {
             alert("로그인에 실패했습니다");
             state.isLogined = false;
+            state.access_token = "";
+        })
+        builder.addCase(getUserInfo.fulfilled , ( state , action ) => {
+            state.user = action.payload.data;
         })
     }
 })

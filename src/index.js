@@ -7,7 +7,7 @@ import LoginPage from "./component/loginPage/loginPage";
 import SignupPage from "./component/signupPage/signupPage";
 import UserInfo from "./component/userInfo";
 import { Provider } from 'react-redux'
-import { store } from "./service/redux/store";
+import { store } from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -2,13 +2,14 @@ import React , { useEffect , useRef } from 'react';
 import Button from "../button";
 import styles from "./logonPage.module.css";
 import { useDispatch , useSelector } from "react-redux";
-import { getLogin } from "../../service/redux/authReducer/authSlice";
 import { useNavigate } from "react-router-dom";
+import { getLogin , getUserInfo } from "../../redux/authReducer/authSlice";
 
 const LoginPage = () => {
 
     const dispatch = useDispatch();
     const isLogined = useSelector((state => state.authReducer.isLogined));
+    const access_token = useSelector(state => state.authReducer.access_token);
     let navigate = useNavigate();
 
     const idRef = useRef();
@@ -22,6 +23,14 @@ const LoginPage = () => {
         }
         //eslint-disable-next-line react-hooks/exhaustive-deps
     } , [isLogined])
+
+    useEffect(() => {
+        if (access_token) {
+            dispatch(getUserInfo(access_token));
+            // navigate('/');
+        }
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    } , [access_token])
 
     const onLogin = async ( e ) => {
         e.preventDefault();

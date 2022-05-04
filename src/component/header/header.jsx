@@ -3,15 +3,12 @@ import styles from "./header.module.css";
 import Button from "../button";
 import { Link } from "react-router-dom";
 import { useDispatch , useSelector } from "react-redux";
-import { getUsers } from "../../service/redux/authReducer/authService";
-import { getLogout } from "../../service/redux/authReducer/authSlice";
-import Cookies from "universal-cookie";
+import { getLogout } from "../../redux/authReducer/authSlice";
 
 const Header = () => {
     const [isModaled , setIsModaled] = useState(false);
     const isLogined = useSelector(state => state.authReducer.isLogined);
     const dispatch = useDispatch();
-    const cookies = new Cookies();
 
     const onModalClick = () => {
         isModaled ? setIsModaled(false) : setIsModaled(true);
@@ -19,14 +16,7 @@ const Header = () => {
 
     const logOut = () => {
         dispatch(getLogout());
-        cookies.remove('access_token');
     };
-
-    const getData = () => {
-        getUsers().then(res => {
-            console.log(res);
-        })
-    }
 
     return (
         <header className={styles.header}>
@@ -45,7 +35,6 @@ const Header = () => {
                 {!isLogined && <Link to="/signup">회원가입</Link>}
                 <Link to="/userInfo">유저정보</Link>
             </nav>
-            <Button btnName="유저정보가져오기" clickFunction={getData}/>
         </header>
     )
 };
