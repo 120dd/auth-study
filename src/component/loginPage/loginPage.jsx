@@ -3,7 +3,7 @@ import Button from "../button";
 import styles from "./logonPage.module.css";
 import { useDispatch , useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getLogin , getUserInfo } from "../../redux/authReducer/authSlice";
+import { getLogin , getLogout , getUserInfo } from "../../redux/authReducer/authSlice";
 
 const LoginPage = () => {
 
@@ -20,6 +20,8 @@ const LoginPage = () => {
         if (isLogined) {
             alert("로그인에 성공했습니다");
             navigate('/');
+        } else {
+            dispatch(getLogout());
         }
         //eslint-disable-next-line react-hooks/exhaustive-deps
     } , [isLogined])
@@ -27,7 +29,6 @@ const LoginPage = () => {
     useEffect(() => {
         if (access_token) {
             dispatch(getUserInfo(access_token));
-            // navigate('/');
         }
         //eslint-disable-next-line react-hooks/exhaustive-deps
     } , [access_token])
