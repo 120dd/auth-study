@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from "react-redux";
+import styles from './userInfo.module.scss'
 
 const UserInfo = () => {
     const userInfo = useSelector((state => state.authReducer.user));
     return (
-        <div>
+        <div className={styles.infoBlock}>
             <h1>UserInfo</h1>
             <ul>
                 <li>Id: {userInfo.id}</li>

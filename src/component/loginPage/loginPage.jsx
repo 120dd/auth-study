@@ -46,7 +46,7 @@ const LoginPage = () => {
             <h1>login</h1>
             <form ref={formRef} className={styles.loginForm}>
                 <input ref={idRef} type="text" placeholder="아이디를 입력하세요"/>
-                <input ref={pwRef} type="text" placeholder="비밀번호를 입력하세요"/>
+                <input ref={pwRef} type="password" placeholder="비밀번호를 입력하세요"/>
                 <Button btnName="login" clickFunction={onLogin}/>
             </form>
         </div>

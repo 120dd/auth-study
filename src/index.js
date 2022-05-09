@@ -5,7 +5,7 @@ import { BrowserRouter , Route , Routes } from "react-router-dom";
 import App from './App';
 import LoginPage from "./component/loginPage/loginPage";
 import SignupPage from "./component/signupPage/signupPage";
-import UserInfo from "./component/userInfo";
+import UserInfo from "./component/userInfo/userInfo";
 import { Provider } from 'react-redux'
 import { persistor , store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
